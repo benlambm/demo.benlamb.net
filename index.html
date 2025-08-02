@@ -30,14 +30,14 @@
             font-size: clamp(2rem, 6vw, 4rem);
             color: #fff;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            margin: 2rem 0;
+            margin: 2rem 0 1rem 0;
             animation: bounce 2s infinite;
         }
 
         .subtitle {
             font-size: clamp(1rem, 3vw, 1.5rem);
             color: #f0f8ff;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
@@ -45,37 +45,89 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
         .confetti-btn {
-            padding: 12px 24px;
+            width: 120px;
+            height: 120px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            border-radius: 50%;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .confetti-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .confetti-btn:hover::before {
+            opacity: 1;
         }
 
         .confetti-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
-        .btn-red { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); color: white; }
-        .btn-blue { background: linear-gradient(45deg, #4ecdc4, #44a08d); color: white; }
-        .btn-gold { background: linear-gradient(45deg, #ffd700, #ffed4e); color: #333; }
-        .btn-purple { background: linear-gradient(45deg, #a8edea, #fed6e3); color: #333; }
-        .btn-rainbow { background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24); color: white; }
+        .confetti-btn:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .btn-emoji {
+            font-size: 2rem;
+        }
+
+        .btn-red { 
+            background: radial-gradient(circle at 30% 30%, #ff8a8a, #ff4757);
+            color: white;
+        }
+        
+        .btn-blue { 
+            background: radial-gradient(circle at 30% 30%, #70d6ff, #3498db);
+            color: white;
+        }
+        
+        .btn-gold { 
+            background: radial-gradient(circle at 30% 30%, #ffd93d, #ffb700);
+            color: #333;
+        }
+        
+        .btn-purple { 
+            background: radial-gradient(circle at 30% 30%, #c56cf0, #9b59b6);
+            color: white;
+        }
+        
+        .btn-rainbow { 
+            background: conic-gradient(from 0deg, #ff4757, #3498db, #1abc9c, #f1c40f, #e74c3c, #ff4757);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
 
         .fans-container {
             position: fixed;
-            bottom: 0;
+            bottom: 20px;
             left: 0;
             right: 0;
             display: flex;
@@ -85,60 +137,84 @@
         }
 
         .fan {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: radial-gradient(circle, #333 30%, #666 70%);
+            background: radial-gradient(circle at center, #2c3e50 0%, #34495e 50%, #1a252f 100%);
             position: relative;
-            animation: spin 1s linear infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .fan::before {
-            content: '';
+        .fan-blades {
             position: absolute;
-            width: 80%;
-            height: 80%;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #555, #888);
-            top: 10%;
-            left: 10%;
+            width: 100%;
+            height: 100%;
+            animation: spin 0.5s linear infinite;
         }
 
-        .fan::after {
-            content: '';
+        .blade {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 40%;
+            height: 8px;
+            background: linear-gradient(90deg, #ecf0f1 0%, #bdc3c7 100%);
+            border-radius: 4px;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .blade:nth-child(1) { transform: translateY(-50%) rotate(0deg); }
+        .blade:nth-child(2) { transform: translateY(-50%) rotate(45deg); }
+        .blade:nth-child(3) { transform: translateY(-50%) rotate(90deg); }
+        .blade:nth-child(4) { transform: translateY(-50%) rotate(135deg); }
+        .blade:nth-child(5) { transform: translateY(-50%) rotate(180deg); }
+        .blade:nth-child(6) { transform: translateY(-50%) rotate(225deg); }
+        .blade:nth-child(7) { transform: translateY(-50%) rotate(270deg); }
+        .blade:nth-child(8) { transform: translateY(-50%) rotate(315deg); }
+
+        .fan-center {
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            background: radial-gradient(circle, #2c3e50, #1a252f);
             border-radius: 50%;
-            background: #222;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
             z-index: 1;
             pointer-events: none;
         }
 
         .confetti.square {
             background: currentColor;
+            box-shadow: 0 0 10px currentColor;
         }
 
         .confetti.circle {
             border-radius: 50%;
             background: currentColor;
+            box-shadow: 0 0 15px currentColor;
         }
 
         .confetti.triangle {
             width: 0;
             height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 10px solid currentColor;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 30px solid currentColor;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .confetti.star {
+            background: currentColor;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            box-shadow: 0 0 20px currentColor;
         }
 
         .server-info {
@@ -179,30 +255,54 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes confetti-float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(-20px) translateX(0) rotate(90deg) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-200px) translateX(var(--drift)) rotate(360deg) scale(1.2);
+                opacity: 1;
+            }
+            80% {
+                transform: translateY(-400px) translateX(calc(var(--drift) * 1.5)) rotate(540deg) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-600px) translateX(calc(var(--drift) * 2)) rotate(720deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
         @keyframes confetti-fall {
             0% {
-                transform: translateY(-100vh) rotate(0deg);
+                transform: translateY(-100vh) translateX(0) rotate(0deg);
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) rotate(720deg);
+                transform: translateY(100vh) translateX(var(--drift)) rotate(720deg);
                 opacity: 0;
             }
         }
 
         @media (max-width: 768px) {
             .fan {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .confetti-buttons {
-                gap: 0.5rem;
+                width: 80px;
+                height: 80px;
             }
             
             .confetti-btn {
-                padding: 10px 16px;
-                font-size: 0.9rem;
+                width: 90px;
+                height: 90px;
+                font-size: 0.8rem;
+            }
+            
+            .btn-emoji {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -225,67 +325,137 @@
         </div>
 
         <div class="confetti-buttons">
-            <button class="confetti-btn btn-red" onclick="launchConfetti('#ff6b6b')">🔴 Red Blast</button>
-            <button class="confetti-btn btn-blue" onclick="launchConfetti('#4ecdc4')">🔵 Blue Storm</button>
-            <button class="confetti-btn btn-gold" onclick="launchConfetti('#ffd700')">🟡 Golden Rain</button>
-            <button class="confetti-btn btn-purple" onclick="launchConfetti('#a8edea')">🟣 Purple Magic</button>
-            <button class="confetti-btn btn-rainbow" onclick="launchRainbowConfetti()">🌈 Rainbow Explosion</button>
+            <button class="confetti-btn btn-red" onclick="launchConfetti('#ff4757')">
+                <span class="btn-emoji">🔴</span>
+                <span>RED</span>
+            </button>
+            <button class="confetti-btn btn-blue" onclick="launchConfetti('#3498db')">
+                <span class="btn-emoji">🔵</span>
+                <span>BLUE</span>
+            </button>
+            <button class="confetti-btn btn-gold" onclick="launchConfetti('#ffb700')">
+                <span class="btn-emoji">🟡</span>
+                <span>GOLD</span>
+            </button>
+            <button class="confetti-btn btn-purple" onclick="launchConfetti('#9b59b6')">
+                <span class="btn-emoji">🟣</span>
+                <span>PURPLE</span>
+            </button>
+            <button class="confetti-btn btn-rainbow" onclick="launchRainbowConfetti()">
+                <span class="btn-emoji">🌈</span>
+                <span>RAINBOW</span>
+            </button>
         </div>
     </div>
 
     <div class="fans-container">
-        <div class="fan"></div>
-        <div class="fan"></div>
-        <div class="fan"></div>
-        <div class="fan"></div>
+        <div class="fan">
+            <div class="fan-blades">
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+            </div>
+            <div class="fan-center"></div>
+        </div>
+        <div class="fan">
+            <div class="fan-blades">
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+            </div>
+            <div class="fan-center"></div>
+        </div>
+        <div class="fan">
+            <div class="fan-blades">
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+            </div>
+            <div class="fan-center"></div>
+        </div>
+        <div class="fan">
+            <div class="fan-blades">
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+            </div>
+            <div class="fan-center"></div>
+        </div>
     </div>
 
     <script>
         // Auto-launch celebration confetti on load
         window.addEventListener('load', () => {
             setTimeout(() => launchRainbowConfetti(), 500);
+            // Continuous gentle confetti
             setInterval(() => {
-                if (Math.random() > 0.7) {
-                    const colors = ['#ff6b6b', '#4ecdc4', '#ffd700', '#a8edea', '#ff8e8e'];
-                    launchConfetti(colors[Math.floor(Math.random() * colors.length)]);
+                if (Math.random() > 0.8) {
+                    const colors = ['#ff4757', '#3498db', '#ffb700', '#9b59b6', '#1abc9c'];
+                    launchConfetti(colors[Math.floor(Math.random() * colors.length)], true);
                 }
-            }, 3000);
+            }, 4000);
         });
 
-        function createConfettiPiece(color, fanIndex = null) {
+        function createConfettiPiece(color, fanIndex = null, fromFan = false) {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             
             // Random shape
-            const shapes = ['square', 'circle', 'triangle'];
+            const shapes = ['square', 'circle', 'triangle', 'star'];
             confetti.classList.add(shapes[Math.floor(Math.random() * shapes.length)]);
             
             // Set color
             confetti.style.color = color;
             
-            // Random size
-            const size = Math.random() * 8 + 6;
+            // Random size (bigger!)
+            const size = Math.random() * 20 + 15; // 15-35px
             confetti.style.width = size + 'px';
             confetti.style.height = size + 'px';
             
-            // Position - either from fan or random
-            if (fanIndex !== null) {
+            // Set drift variable
+            const drift = (Math.random() - 0.5) * 300;
+            confetti.style.setProperty('--drift', drift + 'px');
+            
+            // Position and animation
+            if (fromFan && fanIndex !== null) {
+                // Launch from specific fan
                 const fans = document.querySelectorAll('.fan');
                 const fan = fans[fanIndex];
                 const fanRect = fan.getBoundingClientRect();
-                confetti.style.left = (fanRect.left + fanRect.width / 2) + 'px';
-                confetti.style.top = (fanRect.top) + 'px';
+                confetti.style.left = (fanRect.left + fanRect.width / 2 - size / 2) + 'px';
+                confetti.style.bottom = (window.innerHeight - fanRect.top + 10) + 'px';
+                
+                // Float upward animation
+                const duration = Math.random() * 2 + 3; // 3-5 seconds
+                confetti.style.animation = `confetti-float ${duration}s ease-out forwards`;
             } else {
+                // Fall from top
                 confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = '-20px';
+                confetti.style.top = '-50px';
+                
+                const duration = Math.random() * 3 + 4; // 4-7 seconds
+                confetti.style.animation = `confetti-fall ${duration}s ease-in-out forwards`;
             }
-            
-            // Animation
-            const duration = Math.random() * 2 + 3;
-            const drift = (Math.random() - 0.5) * 200;
-            
-            confetti.style.animation = `confetti-fall ${duration}s ease-out forwards`;
-            confetti.style.transform = `translateX(${drift}px)`;
             
             document.body.appendChild(confetti);
             
@@ -294,61 +464,86 @@
                 if (confetti.parentNode) {
                     confetti.parentNode.removeChild(confetti);
                 }
-            }, duration * 1000);
+            }, 7000);
         }
 
-        function launchConfetti(color) {
-            // Launch from fans
+        function launchConfetti(color, gentle = false) {
+            const confettiCount = gentle ? 15 : 30;
+            
+            // Launch from each fan
             for (let i = 0; i < 4; i++) {
                 setTimeout(() => {
-                    for (let j = 0; j < 8; j++) {
-                        createConfettiPiece(color, i);
+                    for (let j = 0; j < confettiCount / 4; j++) {
+                        setTimeout(() => {
+                            createConfettiPiece(color, i, true);
+                        }, j * 50);
                     }
                 }, i * 100);
             }
             
-            // Launch from top
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    createConfettiPiece(color);
-                }, Math.random() * 1000);
+            // Also launch some from top
+            if (!gentle) {
+                for (let i = 0; i < confettiCount / 2; i++) {
+                    setTimeout(() => {
+                        createConfettiPiece(color);
+                    }, Math.random() * 1500);
+                }
             }
         }
 
         function launchRainbowConfetti() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#ffd700', '#a8edea', '#ff8e8e', '#45b7d1', '#f9ca24', '#6c5ce7'];
+            const colors = [
+                '#ff4757', '#ff6348', '#ff7979',
+                '#3498db', '#54a0ff', '#48dbfb',
+                '#ffb700', '#ffd93d', '#fbdb04',
+                '#9b59b6', '#c56cf0', '#e17055',
+                '#1abc9c', '#00d2d3', '#55efc4'
+            ];
             
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                    createConfettiPiece(randomColor, Math.floor(Math.random() * 4));
-                }, Math.random() * 2000);
+            // Massive burst from fans
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 20; j++) {
+                    setTimeout(() => {
+                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                        createConfettiPiece(randomColor, i, true);
+                    }, i * 100 + j * 30);
+                }
             }
             
-            // Extra burst from top
-            for (let i = 0; i < 30; i++) {
+            // Rain from above
+            for (let i = 0; i < 40; i++) {
                 setTimeout(() => {
                     const randomColor = colors[Math.floor(Math.random() * colors.length)];
                     createConfettiPiece(randomColor);
-                }, Math.random() * 1500);
+                }, Math.random() * 2500);
             }
         }
 
-        // Add some interactive fun
+        // Click anywhere for burst effect
         document.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'BUTTON') {
-                const colors = ['#ff6b6b', '#4ecdc4', '#ffd700', '#a8edea'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
+                const colors = ['#ff4757', '#3498db', '#ffb700', '#9b59b6', '#1abc9c'];
+                const burstColor = colors[Math.floor(Math.random() * colors.length)];
                 
-                // Create confetti at click location
-                for (let i = 0; i < 5; i++) {
+                // Create explosion at click location
+                for (let i = 0; i < 8; i++) {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti circle';
-                    confetti.style.color = randomColor;
-                    confetti.style.left = e.clientX + 'px';
-                    confetti.style.top = e.clientY + 'px';
-                    confetti.style.animation = 'confetti-fall 2s ease-out forwards';
-                    confetti.style.transform = `translateX(${(Math.random() - 0.5) * 100}px)`;
+                    confetti.style.color = burstColor;
+                    confetti.style.width = '25px';
+                    confetti.style.height = '25px';
+                    confetti.style.left = (e.clientX - 12) + 'px';
+                    confetti.style.top = (e.clientY - 12) + 'px';
+                    
+                    const angle = (Math.PI * 2 / 8) * i;
+                    const velocity = 150 + Math.random() * 100;
+                    const xVel = Math.cos(angle) * velocity;
+                    const yVel = Math.sin(angle) * velocity;
+                    
+                    confetti.style.setProperty('--drift', xVel + 'px');
+                    confetti.style.animation = `confetti-fall 2s ease-out forwards`;
+                    confetti.style.transform = `translateY(${yVel}px)`;
+                    
                     document.body.appendChild(confetti);
                     
                     setTimeout(() => {
@@ -370,8 +565,14 @@ Server Details:
 - Web Server: Nginx
 - Repository: https://github.com/benlambm/demo.benlamb.net
 
-This celebration page was built with vanilla HTML, CSS, and JavaScript!
-Try clicking anywhere on the page for surprise confetti! 🎊
+This magical confetti celebration page features:
+✨ Big, bright confetti pieces with glow effects
+🌪️ Realistic fan physics that blow confetti upward
+🔘 Giant circular buttons that beg to be pressed
+🎨 Multiple confetti shapes: squares, circles, triangles, and stars
+🖱️ Click anywhere for confetti bursts!
+
+Have fun! 🎊
         `);
     </script>
 </body>
