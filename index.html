@@ -3,10 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo - demo.benlamb.net</title>
+    <title>🎉 Ben's Web Server is LIVE! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .celebration-container {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #f0f8ff;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .confetti-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .confetti-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .confetti-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn-red { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); color: white; }
+        .btn-blue { background: linear-gradient(45deg, #4ecdc4, #44a08d); color: white; }
+        .btn-gold { background: linear-gradient(45deg, #ffd700, #ffed4e); color: #333; }
+        .btn-purple { background: linear-gradient(45deg, #a8edea, #fed6e3); color: #333; }
+        .btn-rainbow { background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24); color: white; }
+
+        .fans-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .fan {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #333 30%, #666 70%);
+            position: relative;
+            animation: spin 1s linear infinite;
+        }
+
+        .fan::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #555, #888);
+            top: 10%;
+            left: 10%;
+        }
+
+        .fan::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #222;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .confetti.square {
+            background: currentColor;
+        }
+
+        .confetti.circle {
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .confetti.triangle {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid currentColor;
+        }
+
+        .server-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .fan {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .confetti-buttons {
+                gap: 0.5rem;
+            }
+            
+            .confetti-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to demo.benlamb.net</h1>
-    <p>This is a demo site running on nginx.</p>
+    <div class="celebration-container">
+        <h1 class="main-title">🎉 Ben's Web Server is LIVE! 🎉</h1>
+        <p class="subtitle">Welcome to demo.benlamb.net - Now serving the internet with style!</p>
+        
+        <div class="server-info">
+            <h2>🚀 Server Status: ONLINE</h2>
+            <p>This Ubuntu 24 VPS is ready to host amazing web applications!</p>
+            <div class="tech-stack">
+                <span class="tech-badge">🐧 Ubuntu 24</span>
+                <span class="tech-badge">⚡ Nginx</span>
+                <span class="tech-badge">🔧 Git</span>
+                <span class="tech-badge">🐙 GitHub</span>
+                <span class="tech-badge">🎨 Vanilla JS</span>
+            </div>
+        </div>
+
+        <div class="confetti-buttons">
+            <button class="confetti-btn btn-red" onclick="launchConfetti('#ff6b6b')">🔴 Red Blast</button>
+            <button class="confetti-btn btn-blue" onclick="launchConfetti('#4ecdc4')">🔵 Blue Storm</button>
+            <button class="confetti-btn btn-gold" onclick="launchConfetti('#ffd700')">🟡 Golden Rain</button>
+            <button class="confetti-btn btn-purple" onclick="launchConfetti('#a8edea')">🟣 Purple Magic</button>
+            <button class="confetti-btn btn-rainbow" onclick="launchRainbowConfetti()">🌈 Rainbow Explosion</button>
+        </div>
+    </div>
+
+    <div class="fans-container">
+        <div class="fan"></div>
+        <div class="fan"></div>
+        <div class="fan"></div>
+        <div class="fan"></div>
+    </div>
+
+    <script>
+        // Auto-launch celebration confetti on load
+        window.addEventListener('load', () => {
+            setTimeout(() => launchRainbowConfetti(), 500);
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const colors = ['#ff6b6b', '#4ecdc4', '#ffd700', '#a8edea', '#ff8e8e'];
+                    launchConfetti(colors[Math.floor(Math.random() * colors.length)]);
+                }
+            }, 3000);
+        });
+
+        function createConfettiPiece(color, fanIndex = null) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            // Random shape
+            const shapes = ['square', 'circle', 'triangle'];
+            confetti.classList.add(shapes[Math.floor(Math.random() * shapes.length)]);
+            
+            // Set color
+            confetti.style.color = color;
+            
+            // Random size
+            const size = Math.random() * 8 + 6;
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
+            
+            // Position - either from fan or random
+            if (fanIndex !== null) {
+                const fans = document.querySelectorAll('.fan');
+                const fan = fans[fanIndex];
+                const fanRect = fan.getBoundingClientRect();
+                confetti.style.left = (fanRect.left + fanRect.width / 2) + 'px';
+                confetti.style.top = (fanRect.top) + 'px';
+            } else {
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-20px';
+            }
+            
+            // Animation
+            const duration = Math.random() * 2 + 3;
+            const drift = (Math.random() - 0.5) * 200;
+            
+            confetti.style.animation = `confetti-fall ${duration}s ease-out forwards`;
+            confetti.style.transform = `translateX(${drift}px)`;
+            
+            document.body.appendChild(confetti);
+            
+            // Clean up
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.parentNode.removeChild(confetti);
+                }
+            }, duration * 1000);
+        }
+
+        function launchConfetti(color) {
+            // Launch from fans
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => {
+                    for (let j = 0; j < 8; j++) {
+                        createConfettiPiece(color, i);
+                    }
+                }, i * 100);
+            }
+            
+            // Launch from top
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createConfettiPiece(color);
+                }, Math.random() * 1000);
+            }
+        }
+
+        function launchRainbowConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffd700', '#a8edea', '#ff8e8e', '#45b7d1', '#f9ca24', '#6c5ce7'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    createConfettiPiece(randomColor, Math.floor(Math.random() * 4));
+                }, Math.random() * 2000);
+            }
+            
+            // Extra burst from top
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    createConfettiPiece(randomColor);
+                }, Math.random() * 1500);
+            }
+        }
+
+        // Add some interactive fun
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON') {
+                const colors = ['#ff6b6b', '#4ecdc4', '#ffd700', '#a8edea'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Create confetti at click location
+                for (let i = 0; i < 5; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti circle';
+                    confetti.style.color = randomColor;
+                    confetti.style.left = e.clientX + 'px';
+                    confetti.style.top = e.clientY + 'px';
+                    confetti.style.animation = 'confetti-fall 2s ease-out forwards';
+                    confetti.style.transform = `translateX(${(Math.random() - 0.5) * 100}px)`;
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) {
+                            confetti.parentNode.removeChild(confetti);
+                        }
+                    }, 2000);
+                }
+            }
+        });
+
+        // Console easter egg
+        console.log(`
+🎉 Welcome to Ben's Web Server! 🎉
+        
+Server Details:
+- Host: demo.benlamb.net
+- Platform: Ubuntu 24 VPS
+- Web Server: Nginx
+- Repository: https://github.com/benlambm/demo.benlamb.net
+
+This celebration page was built with vanilla HTML, CSS, and JavaScript!
+Try clicking anywhere on the page for surprise confetti! 🎊
+        `);
+    </script>
 </body>
 </html>
